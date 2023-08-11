@@ -1,0 +1,69 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    alm-examples: '[]'
+    capabilities: Basic Install
+  name: cf-operator.v0.0.0
+  namespace: placeholder
+spec:
+  apiservicedefinitions: {}
+  customresourcedefinitions:
+    owned:
+    - description: ArgoTunnelIngressRule is the Schema for the argotunnelingressrules
+        API
+      displayName: Argo Tunnel Ingress Rule
+      kind: ArgoTunnelIngressRule
+      name: argotunnelingressrules.cloudflare.cf.sys-int.de
+      version: v1alpha1
+    - description: ArgoTunnel is the Schema for the argotunnels API
+      displayName: Argo Tunnel
+      kind: ArgoTunnel
+      name: argotunnels.cloudflare.cf.sys-int.de
+      version: v1alpha1
+    - description: DNSRecord is the Schema for the dnsrecords API
+      displayName: DNSRecord
+      kind: DNSRecord
+      name: dnsrecords.cloudflare.cf.sys-int.de
+      statusDescriptors:
+      - description: 'INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
+          Important: Run "make" to regenerate code after modifying this file'
+        displayName: Conditions
+        path: conditions
+      version: v1alpha1
+    - description: Zone is the Schema for the zones API
+      displayName: Zone
+      kind: Zone
+      name: zones.cloudflare.cf.sys-int.de
+      version: v1alpha1
+  description: operator to configure cloudflare services
+  displayName: cf-operator
+  icon:
+  - base64data: ""
+    mediatype: ""
+  install:
+    spec:
+      deployments: null
+    strategy: ""
+  installModes:
+  - supported: false
+    type: OwnNamespace
+  - supported: false
+    type: SingleNamespace
+  - supported: false
+    type: MultiNamespace
+  - supported: true
+    type: AllNamespaces
+  keywords:
+  - cloudflare
+  - services
+  - dns
+  - records
+  - tunnel
+  links:
+  - name: Cf Operator
+    url: https://cf-operator.domain
+  maturity: alpha
+  provider:
+    name: cf-operator
+  version: 0.0.0

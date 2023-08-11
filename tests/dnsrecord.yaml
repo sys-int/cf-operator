@@ -1,0 +1,11 @@
+apiVersion: cloudflare.cf.sys-int.de/v1alpha1
+kind: DNSRecord
+metadata:
+  name: dnsrecord-sample
+  namespace: test
+spec:
+  cloudflare:
+    CLOUDFLARE_API_KEY: ""
+    CLOUDFLARE_API_TOKEN: ""
+    CLOUDFLARE_TUNNEL_CREDENTIAL_FILE: CLOUDFLARE_TUNNEL_CREDENTIAL_FILE
+    CLOUDFLARE_TUNNEL_CREDENTIAL_SECRET: CLOUDFLARE_TUNNEL_CREDENTIAL_SECRET

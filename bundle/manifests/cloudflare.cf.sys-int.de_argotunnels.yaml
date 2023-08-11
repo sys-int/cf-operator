@@ -1,0 +1,127 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.11.1
+  creationTimestamp: null
+  name: argotunnels.cloudflare.cf.sys-int.de
+spec:
+  group: cloudflare.cf.sys-int.de
+  names:
+    kind: ArgoTunnel
+    listKind: ArgoTunnelList
+    plural: argotunnels
+    singular: argotunnel
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.tunnelId
+      name: TunnelID
+      type: string
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: ArgoTunnel is the Schema for the argotunnels API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ArgoTunnelSpec defines the desired state of ArgoTunnel
+            properties:
+              cloudflare:
+                description: Cloudflare Credentials
+                properties:
+                  CLOUDFLARE_API_KEY:
+                    default: CLOUDFLARE_API_KEY
+                    description: Key in the secret to use for Cloudflare API Key,
+                      defaults to CLOUDFLARE_API_KEY. Needs Email also to be provided.
+                      For Delete operations for new tunnels only, or as an alternate
+                      to API Token
+                    type: string
+                  CLOUDFLARE_API_TOKEN:
+                    default: CLOUDFLARE_API_TOKEN
+                    description: Key in the secret to use for Cloudflare API token,
+                      defaults to CLOUDFLARE_API_TOKEN
+                    type: string
+                  CLOUDFLARE_TUNNEL_CREDENTIAL_FILE:
+                    default: CLOUDFLARE_TUNNEL_CREDENTIAL_FILE
+                    description: Key in the secret to use as credentials.json for
+                      an existing tunnel, defaults to CLOUDFLARE_TUNNEL_CREDENTIAL_FILE
+                    type: string
+                  CLOUDFLARE_TUNNEL_CREDENTIAL_SECRET:
+                    default: CLOUDFLARE_TUNNEL_CREDENTIAL_SECRET
+                    description: Key in the secret to use as tunnel secret for an
+                      existing tunnel, defaults to CLOUDFLARE_TUNNEL_CREDENTIAL_SECRET
+                    type: string
+                  accountId:
+                    description: Account ID in Cloudflare. AccountId and AccountName
+                      cannot be both empty. If both are provided, Account ID is used
+                      if valid, else falls back to Account Name.
+                    type: string
+                  accountName:
+                    description: Account Name in Cloudflare. AccountName and AccountId
+                      cannot be both empty. If both are provided, Account ID is used
+                      if valid, else falls back to Account Name.
+                    type: string
+                  domain:
+                    description: Cloudflare Domain to which this tunnel belongs to
+                    type: string
+                  email:
+                    description: Email to use along with API Key for Delete operations
+                      for new tunnels only, or as an alternate to API Token
+                    type: string
+                  secret:
+                    description: Secret containing Cloudflare API key/token
+                    type: string
+                type: object
+              image:
+                default: cloudflare/cloudflared:2023.7.3
+                description: Image sets the Cloudflared Image to use. Defaults to
+                  the image set during the release of the operator.
+                type: string
+              size:
+                default: 1
+                description: Size defines the number of Daemon pods to run for this
+                  tunnel
+                format: int32
+                minimum: 0
+                type: integer
+            type: object
+          status:
+            description: ArgoTunnelStatus defines the observed state of ArgoTunnel
+            properties:
+              accountId:
+                type: string
+              tunnelId:
+                type: string
+              tunnelName:
+                type: string
+              zoneId:
+                type: string
+            required:
+            - accountId
+            - tunnelId
+            - tunnelName
+            - zoneId
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: null
+  storedVersions: null

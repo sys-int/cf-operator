@@ -1,0 +1,7 @@
+apiVersion: cloudflare.cf.sys-int.de/v1alpha1
+kind: ArgoTunnel
+metadata:
+  name: argotunnel-sample
+  namespace: test
+spec:
+  image: test/test:v123

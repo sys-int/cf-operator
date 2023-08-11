@@ -1,0 +1,138 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: manager-role
+rules:
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - cloudflare.cf.sys-int.de
+  resources:
+  - argotunnelingressrules
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - cloudflare.cf.sys-int.de
+  resources:
+  - argotunnelingressrules/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - cloudflare.cf.sys-int.de
+  resources:
+  - argotunnelingressrules/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - cloudflare.cf.sys-int.de
+  resources:
+  - argotunnels
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - cloudflare.cf.sys-int.de
+  resources:
+  - argotunnels/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - cloudflare.cf.sys-int.de
+  resources:
+  - argotunnels/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - cloudflare.cf.sys-int.de
+  resources:
+  - dnsrecords
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - cloudflare.cf.sys-int.de
+  resources:
+  - dnsrecords/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - cloudflare.cf.sys-int.de
+  resources:
+  - dnsrecords/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - cloudflare.cf.sys-int.de
+  resources:
+  - zones
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - cloudflare.cf.sys-int.de
+  resources:
+  - zones/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - cloudflare.cf.sys-int.de
+  resources:
+  - zones/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - get
+  - list
+  - watch

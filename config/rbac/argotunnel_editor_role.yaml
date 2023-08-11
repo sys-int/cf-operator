@@ -1,0 +1,31 @@
+# permissions for end users to edit argotunnels.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: argotunnel-editor-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: cf-operator
+    app.kubernetes.io/part-of: cf-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: argotunnel-editor-role
+rules:
+- apiGroups:
+  - cloudflare.cf.sys-int.de
+  resources:
+  - argotunnels
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - cloudflare.cf.sys-int.de
+  resources:
+  - argotunnels/status
+  verbs:
+  - get
